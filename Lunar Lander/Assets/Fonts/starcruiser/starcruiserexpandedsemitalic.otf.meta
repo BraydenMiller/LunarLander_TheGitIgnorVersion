@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a7a26da26cdf46245979bad1632ebacb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Starcruiser Expanded Semi-Italic
+  fontNames:
+  - Starcruiser Expanded Semi-Italic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 62c5b4f1c06736141aee9b42552398a0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
