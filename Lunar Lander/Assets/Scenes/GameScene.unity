@@ -663,6 +663,11 @@ PrefabInstance:
       propertyPath: gameStateText
       value: 
       objectReference: {fileID: 45762337}
+    - target: {fileID: 2049030093634360422, guid: f2c9b819de9b3924aa418358f3c8c878,
+        type: 3}
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c9b819de9b3924aa418358f3c8c878, type: 3}
 --- !u!1001 &3870521826338668343
