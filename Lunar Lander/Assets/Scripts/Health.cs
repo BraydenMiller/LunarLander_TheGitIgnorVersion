@@ -10,4 +10,11 @@ public class Health : MonoBehaviour
     {
         health = 100;
     }
+    private void Update()
+    {
+        if (health < 0)
+        {
+            health = 0;
+        }
+    }
 }

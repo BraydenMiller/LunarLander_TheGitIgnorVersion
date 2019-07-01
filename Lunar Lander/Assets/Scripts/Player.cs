@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     public float deadZone;
     public float gravity;
     public bool isGrounded;
+
     float speed;
     public GameObject myGameObject;
+    public GameObject landingObject;
+    public GameObject engineObject;
+    public GameObject hurtObject;
 
     //The player's rigidbody.
     public Rigidbody myRigidBody;
@@ -30,37 +34,46 @@ public class Player : MonoBehaviour
         if (collision.collider.tag == "Ground")
         {
             isGrounded = true;
-            ScoreSystem.score -= 15;
+            if (speed >= 25 && isGrounded == true)
+            {
+                Health.health -= Mathf.RoundToInt(speed);
+                ScoreSystem.score -= 15;
+                Hurt();
+            }
+            else
+            {
+                ScoreSystem.score -= 15;
+                TurnOffHurt();
+                Landing();
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (speed >= 25 && isGrounded == true)
-        {
-            Health.health -= Mathf.RoundToInt(speed);
-        } 
-
+        //Sets our speed.
         speed = myRigidBody.velocity.magnitude;
-
-        Debug.Log(speed);
 
         //Handles verticle movement using thrust & gravity.
         if (Input.GetButton("Upwards"))
         {
             myRigidBody.AddForce(transform.up * thrust);
             isGrounded = false;
+            TurnOffLanding();
+            ShipEngines();
         }
         else
         {
             myRigidBody.AddForce(transform.up * gravity);
+            TurnOffEngines();
         }
 
 
 
+
         //Handles moving left, right, forward and backwards using our sideThrust value.
+        //XboxController
         if (Input.GetAxis("Forwards") < -deadZone && isGrounded == false)
         {
             myRigidBody.AddForce(transform.forward * thrust * sideThrusters);
@@ -80,5 +93,62 @@ public class Player : MonoBehaviour
         {
             myRigidBody.AddForce(transform.right * thrust * sideThrusters);
         }
+
+        //PC Keyboard
+        if (Input.GetKey(KeyCode.D) && isGrounded == false)
+        {
+            myRigidBody.AddForce(transform.right * thrust * sideThrusters);
+        }
+
+        if (Input.GetKey(KeyCode.A) && isGrounded == false)
+        {
+            myRigidBody.AddForce(transform.right * -thrust * sideThrusters);
+        }
+
+        if (Input.GetKey(KeyCode.S) && isGrounded == false)
+        {
+            myRigidBody.AddForce(transform.forward * -thrust * sideThrusters);
+        }
+
+        if (Input.GetKey(KeyCode.W) && isGrounded == false)
+        {
+            myRigidBody.AddForce(transform.forward * thrust * sideThrusters);
+        }
+    }
+
+    //Turns our hurt object on.
+    void Hurt()
+    {
+        hurtObject.SetActive(true);
+    }
+
+    //Turns our landing object on.
+    void Landing()
+    {
+        landingObject.SetActive(true);
+    }
+
+    //Turns our engine  object on.
+    void ShipEngines()
+    {
+        engineObject.SetActive(true);
+    }
+
+    //Turns our engine object off.
+    void TurnOffEngines()
+    {
+        engineObject.SetActive(false);
+    }
+
+    //Turns our landing object off.
+    void TurnOffLanding()
+    {
+        landingObject.SetActive(false);
+    }
+
+    //Turns our hurt object off.
+    void TurnOffHurt()
+    {
+        hurtObject.SetActive(false);
     }
 }

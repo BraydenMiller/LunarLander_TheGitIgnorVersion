@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class _ReadMe : MonoBehaviour
 {
-
+    /*    Downloaded Loop & Music Free Version 1.3 by Marching Dream 2018/19 available @ https://assetstore.unity.com/publishers/26878 
+     *    Downloaded Space SFX - 102218 by GWriterSudio available @ https://assetstore.unity.com/packages/audio/sound-fx/space-sfx-102218-131463
+    */
 }
