@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 126955712}
   - component: {fileID: 126955715}
   - component: {fileID: 126955711}
+  - component: {fileID: 126955716}
   m_Layer: 0
   m_Name: Thruster4
   m_TagString: Untagged
@@ -169,7 +170,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!65 &126955712
 BoxCollider:
@@ -244,6 +245,20 @@ MonoBehaviour:
   thrust: 10
   deadZone: 0.3
   myRigidBody: {fileID: 126955711}
+--- !u!138 &126955716
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126955709}
+  m_ConnectedBody: {fileID: 810092744}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &600716423
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +273,7 @@ GameObject:
   - component: {fileID: 600716426}
   - component: {fileID: 600716425}
   - component: {fileID: 600716429}
+  - component: {fileID: 600716430}
   m_Layer: 0
   m_Name: Thruster2
   m_TagString: Untagged
@@ -293,7 +309,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!65 &600716426
 BoxCollider:
@@ -368,6 +384,20 @@ MonoBehaviour:
   thrust: 10
   deadZone: 0.3
   myRigidBody: {fileID: 600716425}
+--- !u!138 &600716430
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600716423}
+  m_ConnectedBody: {fileID: 810092744}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &810092743
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810092743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 17.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1648572438}
@@ -478,7 +508,7 @@ Transform:
   - {fileID: 1018692254}
   - {fileID: 126955710}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1018692253
 GameObject:
@@ -494,6 +524,7 @@ GameObject:
   - component: {fileID: 1018692256}
   - component: {fileID: 1018692259}
   - component: {fileID: 1018692255}
+  - component: {fileID: 1018692260}
   m_Layer: 0
   m_Name: Thruster3
   m_TagString: Untagged
@@ -529,7 +560,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!65 &1018692256
 BoxCollider:
@@ -604,6 +635,20 @@ MonoBehaviour:
   thrust: 10
   deadZone: 0.3
   myRigidBody: {fileID: 1018692255}
+--- !u!138 &1018692260
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018692253}
+  m_ConnectedBody: {fileID: 810092744}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &1243944427
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1262112684
 GameObject:
@@ -792,6 +837,7 @@ GameObject:
   - component: {fileID: 1648572441}
   - component: {fileID: 1648572440}
   - component: {fileID: 1648572439}
+  - component: {fileID: 1648572444}
   m_Layer: 0
   m_Name: Thruster1
   m_TagString: Untagged
@@ -827,7 +873,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!114 &1648572440
 MonoBehaviour:
@@ -902,3 +948,97 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648572437}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!138 &1648572444
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648572437}
+  m_ConnectedBody: {fileID: 810092744}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
+--- !u!1001 &1832952841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1285904792267980168, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_Name
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980277, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285904792267980276, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: m_TerrainData
+      value: 
+      objectReference: {fileID: 15600000, guid: 23bceaf2418d3814db3f9c1c8f3c84ef,
+        type: 2}
+    - target: {fileID: 1285904792267980170, guid: 2a463b06cde04d7449020838298e131a,
+        type: 3}
+      propertyPath: depth
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a463b06cde04d7449020838298e131a, type: 3}
