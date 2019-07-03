@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - OuterZone
   - InnerZone
+  - GravityField
   layers:
   - Default
   - TransparentFX
