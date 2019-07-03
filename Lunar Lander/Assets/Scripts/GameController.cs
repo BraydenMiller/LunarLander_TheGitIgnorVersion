@@ -25,22 +25,24 @@ public class GameController : MonoBehaviour
             gameStateText.text = "you lose";
             Invoke("LoadTitle", 3f);
         }
-        else if (ScoreSystem.score >= 150)
+
+        if (ScoreSystem.score >= 90)
         {
             gameStateText.text = "you win";
+            Invoke("LoadTitle", 3f);
         }
+            //Sets our scoreUI.
+            scoreText.text = ScoreSystem.score.ToString();
 
-        //Sets our scoreUI.
-        scoreText.text = ScoreSystem.score.ToString();
+            //Sets our HeightUI to the player height.
+            heightText.text = myGameObject.transform.position.y.ToString("f0") + "M";
 
-        //Sets our HeightUI to the player height.
-        heightText.text = myGameObject.transform.position.y.ToString("f0") + "M";
+            //Sets our VelocityUI to the velocity of the player.
+            velocityText.text = myGameObject.GetComponentInChildren<Rigidbody>().velocity.magnitude.ToString("f0") + "Kms";
 
-        //Sets our VelocityUI to the velocity of the player.
-        velocityText.text = myGameObject.GetComponentInChildren<Rigidbody>().velocity.magnitude.ToString("f0") + "Kms";
+            //Sets our HullUI.
+            hullText.text = Health.health.ToString() + "%";
 
-        //Sets our HullUI.
-        hullText.text = Health.health.ToString() + "%";
     }
 
     void LoadTitle()
