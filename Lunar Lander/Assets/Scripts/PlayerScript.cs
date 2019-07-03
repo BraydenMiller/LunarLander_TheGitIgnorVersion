@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
 
     //The verticle thrust & the side thrust.
@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float gravity;
     public bool isGrounded;
 
-    float speed;
+    public float speed;
     public GameObject myGameObject;
     public GameObject landingObject;
     public GameObject engineObject;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //Handles how we interact with the ground at a certain speed threshold.
         if (collision.collider.tag == "Ground")
         {
             isGrounded = true;
@@ -47,6 +48,18 @@ public class Player : MonoBehaviour
                 Landing();
             }
         }
+
+        //Handles how we interact with landing pads at a certain speed threshold.
+        if (collision.collider.tag == "LandingZone")
+        {
+            isGrounded = true;
+            if (speed >= 25 && isGrounded == true)
+            {
+                Health.health -= Mathf.RoundToInt(speed);
+                ScoreSystem.score -= 15;
+                Hurt();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -56,7 +69,7 @@ public class Player : MonoBehaviour
         speed = myRigidBody.velocity.magnitude;
 
         //Handles verticle movement using thrust & gravity.
-        if (Input.GetButton("Upwards"))
+        if (Input.GetAxis("Upwards") > deadZone)
         {
             myRigidBody.AddForce(transform.up * thrust);
             isGrounded = false;

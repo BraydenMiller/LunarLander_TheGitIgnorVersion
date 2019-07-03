@@ -23,7 +23,7 @@ public class Thruster : MonoBehaviour
     void Update()
     {
         //Handles verticle movement using thrust & gravity.
-        if (Input.GetButton("Upwards"))
+        if (Input.GetAxis("Upwards") < -deadZone)
         {
             myRigidBody.AddForce(transform.up * thrust);
         }
