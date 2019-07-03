@@ -988,7 +988,7 @@ PrefabInstance:
     - target: {fileID: 2049030093634360417, guid: f2c9b819de9b3924aa418358f3c8c878,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.06
       objectReference: {fileID: 0}
     - target: {fileID: 2049030093634360417, guid: f2c9b819de9b3924aa418358f3c8c878,
         type: 3}
@@ -1100,6 +1100,12 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2049030093634360418, guid: f2c9b819de9b3924aa418358f3c8c878,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7532656425397477037, guid: 3e40340215f2bb64ea5a416bb1bd295d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c9b819de9b3924aa418358f3c8c878, type: 3}
 --- !u!1001 &2903121075772943655
