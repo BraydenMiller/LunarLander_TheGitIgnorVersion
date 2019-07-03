@@ -8,6 +8,7 @@ public class SceneManagement : MonoBehaviour
     public Canvas myCanvas;
     public GameObject myObject;
     public bool isPaused;
+    public GameObject myPlayer;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetButton("Pause"))
         {
+            myPlayer.GetComponent<PlayerScript>().enabled = false;
             myObject.gameObject.SetActive(true);
             Time.timeScale = 0f;
 
@@ -56,6 +58,7 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetButton("Unpause"))
         {
+            myPlayer.GetComponent<PlayerScript>().enabled = true;
             myObject.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
@@ -64,5 +67,10 @@ public class SceneManagement : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void LoadSceneIndex()
+    {
+        SceneManager.LoadScene(0);
     }
 }
