@@ -20,17 +20,13 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
+        //Our death trigger - loads the main scene if we die.
         if (Health.health <= 0)
         {
             gameStateText.text = "you lose";
             Invoke("LoadTitle", 3f);
         }
 
-        if (ScoreSystem.score >= 90)
-        {
-            gameStateText.text = "you win";
-            Invoke("LoadTitle", 3f);
-        }
             //Sets our scoreUI.
             scoreText.text = ScoreSystem.score.ToString();
 
@@ -45,6 +41,7 @@ public class GameController : MonoBehaviour
 
     }
 
+    //Loads the title.
     void LoadTitle()
     {
         SceneManager.LoadScene("TitleScene");

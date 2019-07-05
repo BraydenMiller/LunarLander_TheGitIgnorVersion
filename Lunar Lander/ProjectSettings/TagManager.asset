@@ -9,6 +9,8 @@ TagManager:
   - OuterZone
   - InnerZone
   - GravityField
+  - StartingPad
+  - InactivePad
   layers:
   - Default
   - TransparentFX

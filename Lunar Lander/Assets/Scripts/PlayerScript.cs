@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class PlayerScript : MonoBehaviour
     public float deadZone;
     public float gravity;
     public bool isGrounded;
+    float ourTransform;
 
     public float speed;
     public GameObject myGameObject;
     public GameObject landingObject;
     public GameObject engineObject;
     public GameObject hurtObject;
+
+    //A reference to the game controller script.
+    GameController gameController;
 
     //The player's rigidbody.
     public Rigidbody myRigidBody;
@@ -27,11 +32,17 @@ public class PlayerScript : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody>();
         isGrounded = false;
+        //Gets our game controller script.
+        gameController = GetComponent<GameController>();
+
+        //Locks our cursor.
+        Cursor.lockState = CursorLockMode.Locked;
+        ourTransform = transform.rotation.x;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        //Handles how we interact with the ground at a certain speed threshold.
+        //Handles how we interact with the ground or any of the pads at a certain speed threshold.
         if (collision.collider.tag == "Ground")
         {
             isGrounded = true;
@@ -40,17 +51,17 @@ public class PlayerScript : MonoBehaviour
                 Health.health -= Mathf.RoundToInt(speed);
                 ScoreSystem.score -= 15;
                 Hurt();
+                Invoke("TurnOffHurt", 0.4f);
             }
             else
             {
                 ScoreSystem.score -= 15;
-                TurnOffHurt();
                 Landing();
+                Invoke("TurnOffLanding", 0.4f);
             }
         }
 
-        //Handles how we interact with landing pads at a certain speed threshold.
-        if (collision.collider.tag == "LandingZone")
+        if (collision.collider.tag == "LandingZone" || collision.collider.tag == "StartingPad")
         {
             isGrounded = true;
             if (speed >= 25 && isGrounded == true)
@@ -58,18 +69,52 @@ public class PlayerScript : MonoBehaviour
                 Health.health -= Mathf.RoundToInt(speed);
                 ScoreSystem.score -= 15;
                 Hurt();
+                Invoke("TurnOffHurt", 0.4f);
             }
+        }
+
+        //If it collides with the player.
+        if (collision.gameObject.tag == "InactivePad")
+        {
+            Debug.Log("Collision");
+            /*Our win conditon - wins the game if we have enough points and the inactive pad has been set to true.
+             *Then loads the main menu. Else shows an error message.
+            */
+            if (ScoreSystem.score >= 100)
+            {
+                gameController.gameStateText.text = "you win";
+                Invoke("LoadTitle", 3f);
+            }
+        }
+
+        if(collision.gameObject.tag == "StartingPad")
+        {
+            gameController.gameStateText.text = "get all the pads first!";
+            Invoke("ClearString", 2f);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (transform.rotation.x <= 0)
+        {
+            ourTransform = 0;
+        }
+
         //Sets our speed.
         speed = myRigidBody.velocity.magnitude;
 
-        //Handles verticle movement using thrust & gravity.
+        //Handles verticle movement using thrust & gravity with controller.
         if (Input.GetAxis("Upwards") > deadZone)
+        {
+            myRigidBody.AddForce(transform.up * thrust);
+            isGrounded = false;
+            TurnOffLanding();
+            ShipEngines();
+        }
+        //Handles verticle movement using thrust & gravity with keyboard.
+        else if (Input.GetKey(KeyCode.Space))
         {
             myRigidBody.AddForce(transform.up * thrust);
             isGrounded = false;
@@ -81,9 +126,6 @@ public class PlayerScript : MonoBehaviour
             myRigidBody.AddForce(transform.up * gravity);
             TurnOffEngines();
         }
-
-
-
 
         //Handles moving left, right, forward and backwards using our sideThrust value.
         //XboxController
@@ -107,7 +149,7 @@ public class PlayerScript : MonoBehaviour
             myRigidBody.AddForce(transform.right * thrust * sideThrusters);
         }
 
-        //PC Keyboard
+        //PC Keyboard      
         if (Input.GetKey(KeyCode.D) && isGrounded == false)
         {
             myRigidBody.AddForce(transform.right * thrust * sideThrusters);
@@ -163,5 +205,17 @@ public class PlayerScript : MonoBehaviour
     void TurnOffHurt()
     {
         hurtObject.SetActive(false);
+    }
+
+    //Clears a text string.
+    void ClearString()
+    {
+        gameController.gameStateText.text = "";
+    }
+
+    //Loads the title.
+    void LoadTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }

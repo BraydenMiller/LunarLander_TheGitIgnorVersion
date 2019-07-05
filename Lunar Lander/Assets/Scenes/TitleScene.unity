@@ -377,6 +377,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486350554}
   m_CullTransparentMesh: 0
+--- !u!1 &515830218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515830220}
+  - component: {fileID: 515830219}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &515830219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515830218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9497c3ae5a97f5348b4da42a45d23961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &515830220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515830218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 191.9414, y: 145.7325, z: 55.037613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,10 +654,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "How To Play\n- - - - - - - - - - \n\nFly your ship around the world landing
-    on landing pads & flying through orbs in the sky in order to earn points!\n\nGet
-    to the interplanetary launch pad with enough points to get to the next world!\n\nBe
+    on landing pads in order to earn points!\n\nOnce you have landed on all the pads,
+    return to the first launch pad with enough points to get to the next world!\n\nBe
     careful not to land on the ground or in water or else you will lose points!\n\nTry
-    to land carefully otherwise you will lose health!\n\n"
+    to land carefully otherwise you will lose health & points!\n\n"
 --- !u!222 &709994593
 CanvasRenderer:
   m_ObjectHideFlags: 0
