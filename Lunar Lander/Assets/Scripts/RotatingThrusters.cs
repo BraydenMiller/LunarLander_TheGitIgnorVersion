@@ -6,6 +6,8 @@ public class RotatingThrusters : MonoBehaviour
 {
     public float thrust;
     public float gravity;
+    public float deadZone;
+    public float movementThrusters;
 
     Rigidbody rb;
 
@@ -15,18 +17,17 @@ public class RotatingThrusters : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpwardsThrusters();
-        DirectionalThrusters();
-        MovementThrusters();
-        DownwardsThrusters();
-    }
-
     void FixedUpdate()
     {
-        
+        rb.AddForce(-transform.up * gravity);
+        P1TN();
+        P2TN();
+        P3TN();
+        P4TN();
+        DirectionalThrusters();
+        UpwardsThrusters();
+        MovementThrusters();
+        DownwardsThrusters();
     }
 
     void UpwardsThrusters() //(Z = BRT), (X = FLT), (C = BLT), (V = FRT)
@@ -95,6 +96,15 @@ public class RotatingThrusters : MonoBehaviour
         {
             rb.AddForce(-transform.right * thrust);
         }
+        if (Input.GetAxis("P1S") < deadZone && Input.GetAxis("P3S") < deadZone)
+        {
+            rb.AddForce(transform.right * thrust * movementThrusters);
+        }
+        if (Input.GetAxis("P2S") > deadZone && Input.GetAxis("P4S") > deadZone)
+        {
+            rb.AddForce(-transform.right * thrust * movementThrusters);
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.up * 0.3f);
@@ -137,23 +147,103 @@ public class RotatingThrusters : MonoBehaviour
         }
     }
 
-    void P1TN()
+    void P1TN()//BRT
     {
-
+        if (Input.GetAxis("P1U") > deadZone)
+        {
+            rb.AddForce(transform.up * thrust);
+            transform.Rotate(Vector3.right * 0.2f);
+            transform.Rotate(Vector3.forward * 0.15f);
+        }
+        if (Input.GetAxis("P1D") > deadZone)
+        {
+            rb.AddRelativeForce(-transform.up * thrust);
+            transform.Rotate(Vector3.left * 0.15f);
+            transform.Rotate(Vector3.back * 0.15f);
+        }
+        if (Input.GetAxis("P1S") < deadZone)
+        {
+            transform.Rotate(Vector3.up * 0.2f);
+        }
+        if (Input.GetAxis("P1M") > deadZone)
+        {
+            rb.AddForce(transform.forward * thrust * movementThrusters);
+            transform.Rotate(Vector3.up * 0.03f);
+        }
     }
 
-    void P2TN()
+    void P2TN()//FLT
     {
-
+        if (Input.GetAxis("P2U") > deadZone)
+        {
+            rb.AddForce(transform.up * thrust);
+            transform.Rotate(Vector3.left * 0.2f);
+            transform.Rotate(Vector3.back * 0.15f);
+        }
+        if (Input.GetAxis("P2D") > deadZone)
+        {
+            rb.AddRelativeForce(-transform.up * thrust);
+            transform.Rotate(Vector3.right * 0.15f);
+            transform.Rotate(Vector3.forward * 0.15f);
+        }
+        if (Input.GetAxis("P2S") > deadZone)
+        {
+            transform.Rotate(Vector3.up * 0.2f);
+        }
+        if (Input.GetAxis("P2M") < deadZone)
+        {
+            rb.AddForce(-transform.forward * thrust * movementThrusters);
+            transform.Rotate(Vector3.up * 0.03f);
+        }
     }
 
-    void P3TN()
+    void P3TN()//FRT
     {
-
+        if (Input.GetAxis("P3U") > deadZone)
+        {
+            rb.AddForce(transform.up * thrust);
+            transform.Rotate(Vector3.left * 0.2f);
+            transform.Rotate(Vector3.forward * 0.15f);
+        }
+        if (Input.GetAxis("P3D") > deadZone)
+        {
+            rb.AddRelativeForce(-transform.up * thrust);
+            transform.Rotate(Vector3.right * 0.15f);
+            transform.Rotate(Vector3.back * 0.15f);
+        }
+        if (Input.GetAxis("P3S") < deadZone)
+        {
+            transform.Rotate(Vector3.down * 0.2f);
+        }
+        if (Input.GetAxis("P3M") < deadZone)
+        {
+            rb.AddForce(-transform.forward * thrust * movementThrusters);
+            transform.Rotate(Vector3.down * 0.03f);
+        }
     }
 
-    void P4TN()
+    void P4TN()//BLT
     {
-
+        if (Input.GetAxis("P4U") > deadZone)
+        {
+            rb.AddForce(transform.up * thrust);
+            transform.Rotate(Vector3.right * 0.2f);
+            transform.Rotate(Vector3.back * 0.15f);
+        }
+        if (Input.GetAxis("P4D") > deadZone)
+        {
+            rb.AddRelativeForce(-transform.up * thrust);
+            transform.Rotate(Vector3.left * 0.15f);
+            transform.Rotate(Vector3.forward * 0.15f);
+        }
+        if (Input.GetAxis("P4S") > deadZone)
+        {
+            transform.Rotate(Vector3.down * 0.2f);
+        }
+        if (Input.GetAxis("P4M") > deadZone)
+        {
+            rb.AddForce(transform.forward * thrust * movementThrusters);
+            transform.Rotate(Vector3.down * 0.03f);
+        }
     }
 }
