@@ -8,6 +8,12 @@ public class RotatingThrusters : MonoBehaviour
     public float gravity;
     public float deadZone;
     public float movementThrusters;
+    public bool letPlay = true;
+
+    public ParticleSystem downParticle1;
+    public ParticleSystem downParticle2;
+    public ParticleSystem downParticle3;
+    public ParticleSystem downParticle4;
 
     Rigidbody rb;
 
@@ -28,6 +34,10 @@ public class RotatingThrusters : MonoBehaviour
         UpwardsThrusters();
         MovementThrusters();
         DownwardsThrusters();
+        ThrusterFrontLeft();
+        ThrusterFrontRIght();
+        ThrusterBackRight();
+        ThrusterBackLeft();
     }
 
     void UpwardsThrusters() //(Z = BRT), (X = FLT), (C = BLT), (V = FRT)
@@ -151,24 +161,32 @@ public class RotatingThrusters : MonoBehaviour
     {
         if (Input.GetAxis("P1U") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.up * thrust);
             transform.Rotate(Vector3.right * 0.2f);
             transform.Rotate(Vector3.forward * 0.15f);
         }
         if (Input.GetAxis("P1D") > deadZone)
         {
+            IsPlaying();
             rb.AddRelativeForce(-transform.up * thrust);
             transform.Rotate(Vector3.left * 0.15f);
             transform.Rotate(Vector3.back * 0.15f);
         }
         if (Input.GetAxis("P1S") < deadZone)
         {
+            IsPlaying();
             transform.Rotate(Vector3.up * 0.2f);
         }
         if (Input.GetAxis("P1M") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.forward * thrust * movementThrusters);
             transform.Rotate(Vector3.up * 0.03f);
+        }
+        else
+        {
+            NoPlay();
         }
     }
 
@@ -176,24 +194,32 @@ public class RotatingThrusters : MonoBehaviour
     {
         if (Input.GetAxis("P2U") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.up * thrust);
             transform.Rotate(Vector3.left * 0.2f);
             transform.Rotate(Vector3.back * 0.15f);
         }
         if (Input.GetAxis("P2D") > deadZone)
         {
+            IsPlaying();
             rb.AddRelativeForce(-transform.up * thrust);
             transform.Rotate(Vector3.right * 0.15f);
             transform.Rotate(Vector3.forward * 0.15f);
         }
         if (Input.GetAxis("P2S") > deadZone)
         {
+            IsPlaying();
             transform.Rotate(Vector3.up * 0.2f);
         }
         if (Input.GetAxis("P2M") < deadZone)
         {
+            IsPlaying();
             rb.AddForce(-transform.forward * thrust * movementThrusters);
             transform.Rotate(Vector3.up * 0.03f);
+        }
+        else
+        {
+            NoPlay();
         }
     }
 
@@ -201,24 +227,32 @@ public class RotatingThrusters : MonoBehaviour
     {
         if (Input.GetAxis("P3U") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.up * thrust);
             transform.Rotate(Vector3.left * 0.2f);
             transform.Rotate(Vector3.forward * 0.15f);
         }
         if (Input.GetAxis("P3D") > deadZone)
         {
+            IsPlaying();
             rb.AddRelativeForce(-transform.up * thrust);
             transform.Rotate(Vector3.right * 0.15f);
             transform.Rotate(Vector3.back * 0.15f);
         }
         if (Input.GetAxis("P3S") < deadZone)
         {
+            IsPlaying();
             transform.Rotate(Vector3.down * 0.2f);
         }
         if (Input.GetAxis("P3M") < deadZone)
         {
+            IsPlaying();
             rb.AddForce(-transform.forward * thrust * movementThrusters);
             transform.Rotate(Vector3.down * 0.03f);
+        }
+        else
+        {
+            NoPlay();
         }
     }
 
@@ -226,24 +260,114 @@ public class RotatingThrusters : MonoBehaviour
     {
         if (Input.GetAxis("P4U") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.up * thrust);
             transform.Rotate(Vector3.right * 0.2f);
             transform.Rotate(Vector3.back * 0.15f);
         }
         if (Input.GetAxis("P4D") > deadZone)
         {
+            IsPlaying();
             rb.AddRelativeForce(-transform.up * thrust);
             transform.Rotate(Vector3.left * 0.15f);
             transform.Rotate(Vector3.forward * 0.15f);
         }
         if (Input.GetAxis("P4S") > deadZone)
         {
+            IsPlaying();
             transform.Rotate(Vector3.down * 0.2f);
         }
         if (Input.GetAxis("P4M") > deadZone)
         {
+            IsPlaying();
             rb.AddForce(transform.forward * thrust * movementThrusters);
             transform.Rotate(Vector3.down * 0.03f);
         }
+        else
+        {
+            NoPlay();
+        }
+    }
+
+    void ThrusterFrontLeft()
+    {
+        if (letPlay)
+        {
+            if (!downParticle1.isPlaying)
+            {
+                downParticle1.Play();
+            }
+        }
+        else
+        {
+            if (downParticle1.isPlaying)
+            {
+                downParticle1.Stop();
+            }
+        }
+    }
+
+    void ThrusterFrontRIght()
+    {
+        if (letPlay)
+        {
+            if (!downParticle2.isPlaying)
+            {
+                downParticle2.Play();
+            }
+        }
+        else
+        {
+            if (downParticle2.isPlaying)
+            {
+                downParticle2.Stop();
+            }
+        }
+    }
+
+    void ThrusterBackLeft()
+    {
+        if (letPlay)
+        {
+            if (!downParticle3.isPlaying)
+            {
+                downParticle3.Play();
+            }
+        }
+        else
+        {
+            if (downParticle3.isPlaying)
+            {
+                downParticle3.Stop();
+            }
+        }
+    }
+
+    void ThrusterBackRight()
+    {
+        if (letPlay)
+        {
+            if (!downParticle4.isPlaying)
+            {
+                downParticle4.Play();
+            }
+        }
+        else
+        {
+            if (downParticle4.isPlaying)
+            {
+                downParticle4.Stop();
+            }
+        }
+    }
+
+    void IsPlaying()
+    {
+        letPlay = true;
+    }
+
+    void NoPlay()
+    {
+        letPlay = false;
     }
 }
