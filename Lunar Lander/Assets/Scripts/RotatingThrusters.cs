@@ -24,6 +24,11 @@ public class RotatingThrusters : MonoBehaviour
         DownwardsThrusters();
     }
 
+    void FixedUpdate()
+    {
+        
+    }
+
     void UpwardsThrusters() //(Z = BRT), (X = FLT), (C = BLT), (V = FRT)
     {
         if (Input.GetKey(KeyCode.Z))
@@ -130,5 +135,25 @@ public class RotatingThrusters : MonoBehaviour
             rb.AddForce(-transform.forward * thrust);
             transform.Rotate(Vector3.down * 0.15f);
         }
+    }
+
+    void P1TN()
+    {
+
+    }
+
+    void P2TN()
+    {
+
+    }
+
+    void P3TN()
+    {
+
+    }
+
+    void P4TN()
+    {
+
     }
 }
