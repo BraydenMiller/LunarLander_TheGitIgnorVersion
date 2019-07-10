@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2
   gravity: 6
+  deadZone: 0
 --- !u!114 &2725505388433428265
 MonoBehaviour:
   m_ObjectHideFlags: 0
