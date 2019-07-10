@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+[System.Serializable]
+public class Boundary
+{
+    public float xMin, xMax, yMin, yMax, zMin, zMax;
+}
 public class PlayerScript : MonoBehaviour
 {
+    public Boundary boundary;
 
     //The verticle thrust & the side thrust.
     public float thrust;
     public float sideThrusters;
     public float deadZone;
+    public float hurtZone;
     public float gravity;
     public bool isGrounded;
     float ourTransform;
@@ -46,7 +54,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.collider.tag == "Ground")
         {
             isGrounded = true;
-            if (speed >= 25 && isGrounded == true)
+            if (speed >= hurtZone && isGrounded == true)
             {
                 Health.health -= Mathf.RoundToInt(speed);
                 ScoreSystem.score -= 15;
@@ -64,7 +72,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.collider.tag == "LandingZone" || collision.collider.tag == "StartingPad")
         {
             isGrounded = true;
-            if (speed >= 25 && isGrounded == true)
+            if (speed >= hurtZone && isGrounded == true)
             {
                 Health.health -= Mathf.RoundToInt(speed);
                 ScoreSystem.score -= 15;
@@ -89,14 +97,23 @@ public class PlayerScript : MonoBehaviour
 
         if(collision.gameObject.tag == "StartingPad")
         {
-            gameController.gameStateText.text = "get all the pads first!";
+            gameController.gameStateText.text = "get all of the pads and then return here!";
             Invoke("ClearString", 2f);
         }
     }
 
+    private void FixedUpdate()
+    {
+        myRigidBody.position = new Vector3
+        (
+            Mathf.Clamp(myRigidBody.position.x, boundary.xMin, boundary.xMax),
+            Mathf.Clamp(myRigidBody.position.y, boundary.yMin, boundary.yMax),
+            Mathf.Clamp(myRigidBody.position.z, boundary.zMin, boundary.zMax));
+    }
     // Update is called once per frame
     void Update()
     {
+
         if (transform.rotation.x <= 0)
         {
             ourTransform = 0;
