@@ -14,25 +14,22 @@ public class PlayerScript : MonoBehaviour
     public Boundary boundary;
 
     //The verticle thrust & the side thrust.
-    public float thrust;
-    public float sideThrusters;
-    public float deadZone;
     public float hurtZone;
-    public float gravity;
     public bool isGrounded;
     float ourTransform;
-
     public float speed;
+
+
     public GameObject myGameObject;
     public GameObject landingObject;
-    public GameObject engineObject;
     public GameObject hurtObject;
 
     //A reference to the game controller script.
     GameController gameController;
-
     //The player's rigidbody.
     public Rigidbody myRigidBody;
+
+
 
     // Start is called before the first frame update
     //Gets our player's rigidbody component.
@@ -47,6 +44,8 @@ public class PlayerScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         ourTransform = transform.rotation.x;
     }
+
+
 
     void OnCollisionEnter(Collision collision)
     {
@@ -102,6 +101,8 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+
+
     private void FixedUpdate()
     {
         myRigidBody.position = new Vector3
@@ -110,6 +111,8 @@ public class PlayerScript : MonoBehaviour
             Mathf.Clamp(myRigidBody.position.y, boundary.yMin, boundary.yMax),
             Mathf.Clamp(myRigidBody.position.z, boundary.zMin, boundary.zMax));
     }
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -122,70 +125,6 @@ public class PlayerScript : MonoBehaviour
         //Sets our speed.
         speed = myRigidBody.velocity.magnitude;
 
-        //Handles verticle movement using thrust & gravity with controller.
-        if (Input.GetAxis("Upwards") > deadZone)
-        {
-            myRigidBody.AddForce(transform.up * thrust);
-            isGrounded = false;
-            TurnOffLanding();
-            ShipEngines();
-        }
-        //Handles verticle movement using thrust & gravity with keyboard.
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            myRigidBody.AddForce(transform.up * thrust);
-            isGrounded = false;
-            TurnOffLanding();
-            ShipEngines();
-        }
-        else
-        {
-            myRigidBody.AddForce(transform.up * gravity);
-            TurnOffEngines();
-        }
-
-        //Handles moving left, right, forward and backwards using our sideThrust value.
-        //XboxController
-        if (Input.GetAxis("Forwards") < -deadZone && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.forward * thrust * sideThrusters);
-        }
-
-        if (Input.GetAxis("Backwards") > deadZone && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.forward * -thrust * sideThrusters);
-        }
-
-        if (Input.GetAxis("Left") < -deadZone && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.right * -thrust * sideThrusters);
-        }
-
-        if (Input.GetAxis("Right") > deadZone && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.right * thrust * sideThrusters);
-        }
-
-        //PC Keyboard      
-        if (Input.GetKey(KeyCode.D) && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.right * thrust * sideThrusters);
-        }
-
-        if (Input.GetKey(KeyCode.A) && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.right * -thrust * sideThrusters);
-        }
-
-        if (Input.GetKey(KeyCode.S) && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.forward * -thrust * sideThrusters);
-        }
-
-        if (Input.GetKey(KeyCode.W) && isGrounded == false)
-        {
-            myRigidBody.AddForce(transform.forward * thrust * sideThrusters);
-        }
     }
 
     //Turns our hurt object on.
@@ -198,24 +137,6 @@ public class PlayerScript : MonoBehaviour
     void Landing()
     {
         landingObject.SetActive(true);
-    }
-
-    //Turns our engine  object on.
-    void ShipEngines()
-    {
-        engineObject.SetActive(true);
-    }
-
-    //Turns our engine object off.
-    void TurnOffEngines()
-    {
-        engineObject.SetActive(false);
-    }
-
-    //Turns our landing object off.
-    void TurnOffLanding()
-    {
-        landingObject.SetActive(false);
     }
 
     //Turns our hurt object off.
