@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 3504117629105958356}
   - component: {fileID: 3504117629105958347}
   - component: {fileID: 3504117629105958346}
-  - component: {fileID: 3228727339292703146}
   - component: {fileID: 2725505388433428266}
   - component: {fileID: 2725505388433428265}
+  - component: {fileID: 1695594434}
   m_Layer: 0
   m_Name: MultiPlayer
   m_TagString: Player
@@ -183,7 +183,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 4, y: 1, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3504117629105958354
 Rigidbody:
@@ -193,13 +193,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3504117629105958355}
   serializedVersion: 2
-  m_Mass: 0.6
-  m_Drag: 2
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_Mass: 1
+  m_Drag: 0.2
+  m_AngularDrag: 0.2
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &3504117629105958356
 MonoBehaviour:
@@ -243,22 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce534ac3a2418dd499f8bdf36e5b41ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3228727339292703146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3504117629105958355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daec277d520ddcf419e0c648d9bbb48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCanvas: {fileID: 0}
-  myObject: {fileID: 0}
-  isPaused: 0
-  myPlayer: {fileID: 3504117629105958355}
 --- !u!114 &2725505388433428266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +258,7 @@ MonoBehaviour:
   thrust: 2
   gravity: 6
   deadZone: 0
+  movementThrusters: 0
 --- !u!114 &2725505388433428265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +279,22 @@ MonoBehaviour:
     zMin: -500
     zMax: 500
   myRigidBody: {fileID: 3504117629105958354}
+--- !u!114 &1695594434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3504117629105958355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf67beaee67fe7649ac29a95869a7b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCanvas: {fileID: 0}
+  myObject: {fileID: 0}
+  isPaused: 0
+  myPlayer: {fileID: 3504117629105958355}
 --- !u!1 &3504117629742989269
 GameObject:
   m_ObjectHideFlags: 0
