@@ -46,7 +46,9 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetButton("Pause"))
         {
-            myPlayer.GetComponent<PlayerScript>().enabled = false;
+            myPlayer.GetComponent<Mover>().enabled = false;
+            myPlayer.GetComponent<LookAt>().enabled = false;
+            Cursor.lockState = CursorLockMode.None;
             myObject.gameObject.SetActive(true);
             Time.timeScale = 0f;
 
@@ -58,7 +60,9 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetButton("Unpause"))
         {
-            myPlayer.GetComponent<PlayerScript>().enabled = true;
+            myPlayer.GetComponent<Mover>().enabled = true;
+            myPlayer.GetComponent<LookAt>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
             myObject.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }

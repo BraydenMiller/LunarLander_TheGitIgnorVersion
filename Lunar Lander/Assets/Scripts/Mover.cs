@@ -13,8 +13,11 @@ public class Mover : MonoBehaviour
     public float deadZone;
     public float gravity;
     public bool isGrounded;
+    public float turnRate;
 
     public GameObject engineObject;
+    public GameObject downwardsParticles;
+    public GameObject horizontalParticles;
     public GameObject landingObject;
 
     // Start is called before the first frame update
@@ -26,6 +29,9 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * turnRate, 0.0f);
+
         //Handles verticle movement using thrust & gravity with controller.
         if (Input.GetAxis("Upwards") > deadZone)
         {
@@ -96,12 +102,14 @@ public class Mover : MonoBehaviour
     void ShipEngines()
     {
         engineObject.SetActive(true);
+        downwardsParticles.SetActive(true);
     }
 
     //Turns our engine object off.
     void TurnOffEngines()
     {
         engineObject.SetActive(false);
+        downwardsParticles.SetActive(false);
     }
 
     //Turns our landing object off.
